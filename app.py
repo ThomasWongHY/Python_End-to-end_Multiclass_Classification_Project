@@ -5,7 +5,7 @@ import sklearn
 import streamlit as st
 import joblib
 import matplotlib
-# from IPython import get_ipython
+from IPython import get_ipython
 from PIL import Image
 
 # load the encoder and model object
@@ -72,31 +72,31 @@ def main():
 
 # encode using ordinal encoder and predict
     if submit:
-        input_array = np.array([collision,
-            Age_band,Sex,Education,service_vehicle,
-            Day_week,Accident_area], ndmin=2)
+       input_array = np.array([collision,
+                  Age_band,Sex,Education,service_vehicle,
+                  Day_week,Accident_area], ndmin=2)
         
-        encoded_arr = list(encoder.transform(input_array).ravel())
+       encoded_arr = list(encoder.transform(input_array).ravel())
         
-        num_arr = [No_vehicles,No_casualties,Hour]
-        pred_arr = np.array(num_arr + encoded_arr).reshape(1,-1)        
+       num_arr = [No_vehicles,No_casualties,Hour]
+       pred_arr = np.array(num_arr + encoded_arr).reshape(1,-1)        
       
 # predict the target from all the input features
-        prediction = model.predict(pred_arr)
+       prediction = model.predict(pred_arr)
         
-        if prediction == 0:
+       if prediction == 0:
            st.write(f"The severity prediction is fatal injury⚠")
-        elif prediction == 1:
+       elif prediction == 1:
            st.write(f"The severity prediction is serious injury")
-        else:
+       else:
            st.write(f"The severity prediction is slight injury")
         
-        st.write("Developed By: Avi kumar Talaviya")
-        st.markdown("""Reach out to me on: [Twitter](https://twitter.com/avikumart_) |
-        [Linkedin](https://www.linkedin.com/in/avi-kumar-talaviya-739153147/) |
-        [Kaggle](https://www.kaggle.com/avikumart) 
-        """)
-       
+       st.write("Developed By: Avi kumar Talaviya")
+       st.markdown("""Reach out to me on: [Twitter](https://twitter.com/avikumart_) |
+       [Linkedin](https://www.linkedin.com/in/avi-kumar-talaviya-739153147/) |
+       [Kaggle](https://www.kaggle.com/avikumart) 
+       """)
+
 a,b,c = st.columns([0.2,0.6,0.2])
 with b:
     st.image("banner-picture.jpeg", use_column_width=True)
@@ -122,4 +122,4 @@ st.markdown("Please find GitHub repository link of project: [Click Here](https:/
   
 # run the main function        
 if __name__ == '__main__':
-  main()
+    main()
